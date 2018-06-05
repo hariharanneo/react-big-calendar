@@ -65,10 +65,7 @@ export function inRange(e, start, end, { startAccessor, endAccessor }) {
   let eEnd = get(e, endAccessor)
 
   let startsBeforeEnd = dates.lte(eStart, end, 'day')
-  // when the event is zero duration we need to handle a bit differently
-  let endsAfterStart = !dates.eq(eStart, eEnd, 'minutes')
-    ? dates.gt(eEnd, start, 'minutes')
-    : dates.gte(eEnd, start, 'minutes')
+  let endsAfterStart = dates.gte(eEnd, start, 'day')
 
   return startsBeforeEnd && endsAfterStart
 }
